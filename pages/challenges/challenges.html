@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>ATOZRY - Challenges</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    background:#000;
+    font-family:Inter,Arial,sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    overflow-x:hidden;
+}
+
+.app{
+    position:relative;
+    width:400px;
+    height:897px;
+    min-height:897px;
+    background:#080e1a;
+    color:#fff;
+    overflow:hidden;
+}
+
+/* =================================
+   IPHONE STATUS BAR
+================================= */
+
+.status-bar{
+    position:absolute;
+    left:0;
+    top:0;
+    width:400px;
+    height:64px;
+}
+
+.time{
+    position:absolute;
+    left:52px;
+    top:27px;
+    font-size:17px;
+    line-height:normal;
+    font-weight:500;
+}
+
+.dynamic-island{
+    position:absolute;
+    left:138px;
+    top:17px;
+    width:126px;
+    height:37px;
+    background:#000;
+    border-radius:30px;
+}
+
+.signal{
+    position:absolute;
+    right:77px;
+    top:29px;
+    display:flex;
+    align-items:flex-end;
+    gap:3px;
+}
+
+.signal span{
+    display:block;
+    width:3px;
+    background:#fff;
+    border-radius:3px;
+}
+
+.signal span:nth-child(1){height:5px}
+.signal span:nth-child(2){height:8px}
+.signal span:nth-child(3){height:11px}
+.signal span:nth-child(4){height:14px}
+
+.wifi{
+    position:absolute;
+    right:59px;
+    top:28px;
+    width:15px;
+    height:12px;
+}
+
+.wifi:before,
+.wifi:after{
+    content:"";
+    position:absolute;
+    border:2px solid #fff;
+    border-left-color:transparent;
+    border-right-color:transparent;
+    border-bottom-color:transparent;
+    border-radius:50%;
+}
+
+.wifi:before{
+    width:16px;
+    height:16px;
+    left:-1px;
+    top:-5px;
+}
+
+.wifi:after{
+    width:7px;
+    height:7px;
+    left:4px;
+    top:1px;
+}
+
+.battery{
+    position:absolute;
+    right:27px;
+    top:29px;
+    width:25px;
+    height:13px;
+    border-radius:4px;
+    background:#fff;
+}
+
+.battery:after{
+    content:"";
+    position:absolute;
+    right:-3px;
+    top:4px;
+    width:2px;
+    height:5px;
+    background:#fff;
+    border-radius:1px;
+}
+
+
+/* =================================
+   HEADER
+================================= */
+
+.heading{
+    position:absolute;
+    left:16px;
+    top:73px;
+    font-size:24px;
+    font-weight:700;
+    line-height:normal;
+}
+
+.subheading{
+    position:absolute;
+    left:19px;
+    top:104px;
+    font-size:13px;
+    font-weight:400;
+}
+
+
+/* =================================
+   TODAY'S CHALLENGE
+================================= */
+
+.today-card{
+    position:absolute;
+    left:24px;
+    top:163px;
+    width:351px;
+    height:192px;
+
+    background:#111926;
+
+    border:1px solid #9734f6;
+    border-radius:30px;
+
+    box-shadow:
+        0 4px 4px #38bdf8,
+        inset 0 4px 4px #8c99ab;
+}
+
+.today-label{
+    position:absolute;
+    left:32px;
+    top:10px;
+
+    color:#7b67bc;
+    font-size:10px;
+    font-weight:500;
+    letter-spacing:0;
+}
+
+.today-title{
+    position:absolute;
+    left:10px;
+    top:43px;
+
+    font-size:20px;
+    font-weight:800;
+}
+
+.today-description{
+    position:absolute;
+    left:10px;
+    top:67px;
+    width:307px;
+
+    font-size:11px;
+    line-height:15px;
+    font-weight:500;
+}
+
+.today-description span{
+    display:block;
+}
+
+.challenge-icon{
+    position:absolute;
+    right:28px;
+    top:23px;
+
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+    background:#2b254b;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#9b75ff;
+    font-size:16px;
+}
+
+.challenge-icon img{
+    width:100%;
+    height:100%;
+}
+
+.start-button{
+    position:absolute;
+    left:20px;
+    top:129px;
+
+    width:288px;
+    height:46px;
+
+    border:none;
+    border-radius:45px;
+
+    background:#d9d9d9;
+    color:#000;
+
+    font-family:Inter,Arial,sans-serif;
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.start-button:hover{
+    background:#fff;
+}
+
+.start-button:active{
+    transform:scale(.98);
+}
+
+
+/* =================================
+   ALL CHALLENGES
+================================= */
+
+.all-title{
+    position:absolute;
+    left:23px;
+    top:371px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+
+/* =================================
+   CHALLENGE ITEMS
+================================= */
+
+.challenge-list{
+    position:absolute;
+    left:0;
+    top:410px;
+    width:400px;
+}
+
+.challenge{
+    position:absolute;
+    left:20px;
+
+    width:355px;
+    height:68px;
+
+    background:#0f1523;
+    border-radius:45px;
+
+    cursor:pointer;
+
+    transition:
+        transform .15s ease,
+        background .15s ease;
+}
+
+.challenge:hover{
+    background:#141c2d;
+    transform:scale(.985);
+}
+
+.challenge:nth-child(1){
+    top:0;
+}
+
+.challenge:nth-child(2){
+    top:76px;
+}
+
+.challenge:nth-child(3){
+    top:151px;
+}
+
+.challenge:nth-child(4){
+    top:230px;
+}
+
+.challenge:nth-child(5){
+    top:305px;
+}
+
+
+/* =================================
+   CHALLENGE ICON
+================================= */
+
+.item-icon{
+    position:absolute;
+    left:19px;
+    top:19px;
+
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+    background:#1b2434;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#7f8ba1;
+}
+
+.item-icon img{
+    width:30px;
+    height:30px;
+}
+
+
+/* =================================
+   TEXT
+================================= */
+
+.challenge-name{
+    position:absolute;
+    left:62px;
+    top:17px;
+
+    font-size:13px;
+    font-weight:600;
+    line-height:normal;
+    white-space:nowrap;
+}
+
+.challenge-meta{
+    position:absolute;
+    left:62px;
+    top:36px;
+
+    font-size:10px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.difficulty{
+    color:#fff;
+}
+
+.dot{
+    margin-left:5px;
+    margin-right:4px;
+}
+
+.xp{
+    color:#35a7ff;
+    font-weight:700;
+}
+
+.xp-icon{
+    color:#35a7ff;
+}
+
+.arrow{
+    position:absolute;
+    right:20px;
+    top:24px;
+
+    color:#fff;
+    font-size:20px;
+    font-weight:300;
+}
+
+
+/* =================================
+   BOTTOM NAVIGATION
+================================= */
+
+.bottom-nav{
+    position:absolute;
+    left:1px;
+    top:809px;
+
+    width:400px;
+    height:64px;
+
+    background:#121826;
+    border-radius:30px;
+
+    display:flex;
+    justify-content:space-around;
+    align-items:flex-start;
+
+    padding-top:10px;
+}
+
+.nav-item{
+    width:70px;
+    height:54px;
+
+    text-decoration:none;
+    text-align:center;
+
+    color:#fff;
+
+    font-size:11px;
+    font-weight:400;
+
+    cursor:pointer;
+}
+
+.nav-icon{
+    width:20px;
+    height:20px;
+
+    margin:0 auto 3px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:19px;
+}
+
+.nav-item.active{
+    color:#35a7ff;
+}
+
+.nav-item.learn{
+    color:#8c99ab;
+}
+
+.nav-item:hover{
+    opacity:.8;
+}
+
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media(max-width:400px){
+
+    .app{
+        width:100vw;
+    }
+
+    .status-bar{
+        width:100vw;
+    }
+
+    .bottom-nav{
+        width:100vw;
+    }
+
+}
+
+@media(min-width:401px){
+
+    body{
+        padding-top:20px;
+        padding-bottom:20px;
+    }
+
+    .app{
+        box-shadow:0 0 30px rgba(0,0,0,.5);
+    }
+
+}
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- ==========================
+         STATUS BAR
+    =========================== -->
+
+    <div class="status-bar">
+
+        <div class="time">9:41</div>
+
+        <div class="dynamic-island"></div>
+
+        <div class="signal">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="wifi"></div>
+
+        <div class="battery"></div>
+
+    </div>
+
+
+    <!-- ==========================
+         HEADER
+    =========================== -->
+
+    <h1 class="heading">
+        Challenges
+    </h1>
+
+    <p class="subheading">
+        0 solved, Sharpen your logic everyday
+    </p>
+
+
+    <!-- ==========================
+         TODAY'S CHALLENGE
+    =========================== -->
+
+    <section class="today-card">
+
+        <div class="today-label">
+            TODAY’S CHALLENGE
+        </div>
+
+        <div class="today-title">
+            Reverse a String
+        </div>
+
+        <div class="today-description">
+            <span>
+                Given a string, return it with characters in reverse order.
+            </span>
+
+            <span>
+                Think about two pointers, slicing, or building the result...
+            </span>
+        </div>
+
+        <div class="challenge-icon">
+            ⚔
+        </div>
+
+        <button class="start-button" onclick="startChallenge()">
+            Start&nbsp; now
+        </button>
+
+    </section>
+
+
+    <!-- ==========================
+         ALL CHALLENGES TITLE
+    =========================== -->
+
+    <div class="all-title">
+        All Challenges
+    </div>
+
+
+    <!-- ==========================
+         CHALLENGE LIST
+    =========================== -->
+
+    <div class="challenge-list">
+
+        <!-- REVERSE STRING -->
+        <div class="challenge" onclick="openChallenge('Reverse a String')">
+
+            <div class="item-icon">
+                ⚔
+            </div>
+
+            <div class="challenge-name">
+                Reverse a String
+            </div>
+
+            <div class="challenge-meta">
+                <span class="difficulty">Easy</span>
+                <span class="dot">·</span>
+                <span class="xp">
+                    ⚡ +50 XP
+                </span>
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <!-- FIZZBUZZ -->
+        <div class="challenge" onclick="openChallenge('FizzBuzz')">
+
+            <div class="item-icon">
+                ⚔
+            </div>
+
+            <div class="challenge-name">
+                FizzBuzz
+            </div>
+
+            <div class="challenge-meta">
+                <span class="difficulty">Easy</span>
+                <span class="dot">·</span>
+                <span class="xp">
+                    ⚡ +40 XP
+                </span>
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <!-- PALINDROME -->
+        <div class="challenge" onclick="openChallenge('Palindrome Check')">
+
+            <div class="item-icon">
+                ⚔
+            </div>
+
+            <div class="challenge-name">
+                Palindrome Check
+            </div>
+
+            <div class="challenge-meta">
+                <span class="difficulty">Easy</span>
+                <span class="dot">·</span>
+                <span class="xp">
+                    ⚡ +60 XP
+                </span>
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <!-- TWO SUM -->
+        <div class="challenge" onclick="openChallenge('Two Sum')">
+
+            <div class="item-icon">
+                ⚔
+            </div>
+
+            <div class="challenge-name">
+                Two Sum
+            </div>
+
+            <div class="challenge-meta">
+                <span class="difficulty">Easy</span>
+                <span class="dot">·</span>
+                <span class="xp">
+                    ⚡ +70 XP
+                </span>
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <!-- PRINT STRING -->
+        <div class="challenge" onclick="openChallenge('Print a String')">
+
+            <div class="item-icon">
+                ⚔
+            </div>
+
+            <div class="challenge-name">
+                Print a String
+            </div>
+
+            <div class="challenge-meta">
+                <span class="difficulty">Easy</span>
+                <span class="dot">·</span>
+                <span class="xp">
+                    ⚡ +50 XP
+                </span>
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================
+         BOTTOM NAVIGATION
+    =========================== -->
+
+    <nav class="bottom-nav">
+
+        <a class="nav-item active"
+           href="#"
+           onclick="navigate('Home',event)">
+
+            <div class="nav-icon">⌂</div>
+            <div>Home</div>
+
+        </a>
+
+
+        <a class="nav-item learn"
+           href="#"
+           onclick="navigate('Learn',event)">
+
+            <div class="nav-icon">▣</div>
+            <div>Learn</div>
+
+        </a>
+
+
+        <a class="nav-item"
+           href="#"
+           onclick="navigate('Challenges',event)">
+
+            <div class="nav-icon">⚔</div>
+            <div>Challenges</div>
+
+        </a>
+
+
+        <a class="nav-item"
+           href="#"
+           onclick="navigate('Leaderboard',event)">
+
+            <div class="nav-icon">♕</div>
+            <div>Leaderboard</div>
+
+        </a>
+
+
+        <a class="nav-item"
+           href="#"
+           onclick="navigate('Profile',event)">
+
+            <div class="nav-icon">♙</div>
+            <div>Profile</div>
+
+        </a>
+
+    </nav>
+
+</div>
+
+
+<script>
+
+/* =================================
+   START TODAY'S CHALLENGE
+================================= */
+
+function startChallenge(){
+
+    alert("Starting: Reverse a String");
+
+}
+
+
+/* =================================
+   OPEN CHALLENGE
+================================= */
+
+function openChallenge(name){
+
+    alert("Opening: " + name);
+
+}
+
+
+/* =================================
+   NAVIGATION
+================================= */
+
+function navigate(page,event){
+
+    event.preventDefault();
+
+    /*
+       Keep Challenges active for now.
+       Later we can connect these buttons
+       to your other Figma pages.
+    */
+
+    if(page === "Challenges"){
+        return;
+    }
+
+    alert("Open " + page);
+
+}
+
+
+/* =================================
+   TOUCH FEEDBACK
+================================= */
+
+document.querySelectorAll(".challenge").forEach(card => {
+
+    card.addEventListener("touchstart", () => {
+        card.style.transform = "scale(.97)";
+    });
+
+    card.addEventListener("touchend", () => {
+        card.style.transform = "";
+    });
+
+});
+
+</script>
+
+</body>
+</html>

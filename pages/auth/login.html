@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATOZRY - Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      font-family: "Inter", sans-serif;
+      background: #02060d;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      border: none;
+      outline: none;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #02060d;
+    }
+
+    /* =========================
+       LOGIN SCREEN
+    ========================= */
+
+    .login-screen {
+      position: relative;
+      width: 400px;
+      height: 874px;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          to bottom,
+          #202c40 4.327%,
+          rgba(8, 19, 37, 0.82) 18.269%,
+          #070c15 62.019%
+        );
+
+      flex-shrink: 0;
+    }
+
+    /* =========================
+       STATUS BAR
+    ========================= */
+
+    .status-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 400px;
+      height: 62px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+    }
+
+    .status-time {
+      position: absolute;
+      left: 53px;
+      top: 21px;
+      color: #f4f4f4;
+      font-size: 17px;
+      line-height: 20px;
+      font-weight: 500;
+    }
+
+    .dynamic-island {
+      position: absolute;
+      top: 14px;
+      left: 140px;
+      width: 125px;
+      height: 37px;
+      background: #000;
+      border-radius: 22px;
+    }
+
+    .status-icons {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    /* SIGNAL */
+
+    .signal {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      width: 22px;
+      height: 16px;
+    }
+
+    .signal i {
+      display: block;
+      width: 3px;
+      background: white;
+      border-radius: 3px;
+    }
+
+    .signal i:nth-child(1) {
+      height: 5px;
+    }
+
+    .signal i:nth-child(2) {
+      height: 8px;
+    }
+
+    .signal i:nth-child(3) {
+      height: 11px;
+    }
+
+    .signal i:nth-child(4) {
+      height: 14px;
+    }
+
+    /* WIFI */
+
+    .wifi {
+      position: relative;
+      width: 17px;
+      height: 14px;
+    }
+
+    .wifi::before,
+    .wifi::after,
+    .wifi span {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 2px solid white;
+      border-color: white transparent transparent transparent;
+      border-radius: 50%;
+    }
+
+    .wifi::before {
+      top: -1px;
+      width: 18px;
+      height: 14px;
+    }
+
+    .wifi::after {
+      top: 3px;
+      width: 11px;
+      height: 9px;
+    }
+
+    .wifi span {
+      top: 7px;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+    }
+
+    /* BATTERY */
+
+    .battery {
+      position: relative;
+      width: 25px;
+      height: 12px;
+      border: 2px solid white;
+      border-radius: 4px;
+    }
+
+    .battery::after {
+      content: "";
+      position: absolute;
+      right: -4px;
+      top: 3px;
+      width: 2px;
+      height: 5px;
+      background: white;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .battery span {
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: 17px;
+      height: 6px;
+      background: white;
+      border-radius: 2px;
+    }
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    .logo-container {
+      position: absolute;
+      left: 127px;
+      top: 94px;
+      width: 142px;
+      height: 142px;
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* =========================
+       WELCOME
+    ========================= */
+
+    .welcome {
+      position: absolute;
+      left: 75px;
+      top: 267px;
+
+      color: white;
+      font-size: 28px;
+      line-height: normal;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* =========================
+       INPUT BOX
+    ========================= */
+
+    .input-box {
+      position: absolute;
+      left: 47px;
+      width: 303px;
+      height: 57px;
+
+      background: rgba(42, 61, 88, 0.37);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .email-box {
+      top: 325px;
+    }
+
+    .password-box {
+      top: 398px;
+    }
+
+    .input-box input {
+      position: absolute;
+      left: 55px;
+      top: 0;
+
+      width: 205px;
+      height: 57px;
+
+      border: none;
+      outline: none;
+      background: transparent;
+
+      color: white;
+      font-size: 20px;
+      font-weight: 400;
+    }
+
+    .input-box input::placeholder {
+      color: #4c4c4c;
+      opacity: 1;
+    }
+
+    .email-icon,
+    .lock-icon {
+      position: absolute;
+      left: 20px;
+      top: 17px;
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    /* =========================
+       PASSWORD TOGGLE
+    ========================= */
+
+    .password-toggle {
+      position: absolute;
+      right: 14px;
+      top: 0;
+
+      width: 32px;
+      height: 57px;
+
+      background: transparent;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .eye-icon {
+      position: relative;
+      display: block;
+      width: 24px;
+      height: 24px;
+    }
+
+    .eye-icon > img:first-child {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 24px;
+      height: 24px;
+    }
+
+    .eye-line {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
+      transform: rotate(40.1deg);
+    }
+
+    /* =========================
+       FORGOT PASSWORD
+    ========================= */
+
+    .forgot-password {
+      position: absolute;
+      left: 215px;
+      top: 466px;
+
+      padding: 0;
+
+      color: #35a7ff;
+      font-size: 16px;
+      font-weight: 400;
+
+      background: transparent;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
+    .login-button {
+      position: absolute;
+      left: 50px;
+      top: 520px;
+
+      width: 303px;
+      height: 50px;
+
+      background: #35a7ff;
+      border: 1px solid #35a7ff;
+      border-radius: 25px;
+
+      color: #000;
+      font-size: 21px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.15s ease,
+        filter 0.15s ease;
+    }
+
+    .login-button:hover {
+      filter: brightness(1.04);
+    }
+
+    .login-button:active {
+      transform: scale(0.98);
+    }
+
+    /* =========================
+       DIVIDER
+    ========================= */
+
+    .continue-divider {
+      position: absolute;
+      left: 0;
+      top: 604px;
+
+      width: 400px;
+      height: 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .continue-divider span {
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      white-space: nowrap;
+      margin: 0 24px;
+    }
+
+    .divider-line {
+      display: block;
+      width: 96px;
+      height: 1px;
+    }
+
+    .left-line {
+      position: absolute;
+      left: 19px;
+      top: 10px;
+    }
+
+    .right-line {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+    }
+
+    /* =========================
+       SOCIAL BUTTONS
+    ========================= */
+
+    .social-button {
+      position: absolute;
+      left: 50px;
+
+      width: 303px;
+      height: 50px;
+
+      border-radius: 25px;
+      background: transparent;
+
+      color: white;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 18px;
+      font-weight: 500;
+
+      transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+    }
+
+    .social-button img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      margin-right: 10px;
+    }
+
+    .social-button:hover {
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .social-button:active {
+      transform: scale(0.98);
+    }
+
+    /* GOOGLE */
+
+    .google-button {
+      top: 647px;
+
+      border: 0.8px solid #f44336;
+
+      box-shadow:
+        -3px -3px 6px 0 rgba(244, 67, 54, 0.75),
+        3px 3px 6px 0 rgba(244, 67, 54, 0.75);
+    }
+
+    /* GITHUB */
+
+    .github-button {
+      top: 713px;
+
+      border: 0.8px solid #8492a6;
+
+      box-shadow:
+        -3px -3px 6px 0 rgba(132, 146, 166, 0.75),
+        3px 3px 6px 0 rgba(132, 146, 166, 0.75);
+    }
+
+    /* LINKEDIN */
+
+    .linkedin-button {
+      top: 779px;
+
+      border: 0.8px solid #38bdf8;
+
+      box-shadow:
+        -3px -3px 6px 0 rgba(56, 189, 248, 0.75),
+        3px 3px 6px 0 rgba(56, 189, 248, 0.75);
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 400px) {
+      .login-screen {
+        width: 100vw;
+        min-height: 874px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <main class="login-screen">
+
+      <!-- STATUS BAR -->
+      <div class="status-bar">
+        <span class="status-time">9:41</span>
+
+        <div class="dynamic-island"></div>
+
+        <div class="status-icons">
+
+          <span class="signal">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+
+          <span class="wifi">
+            <span></span>
+          </span>
+
+          <span class="battery">
+            <span></span>
+          </span>
+
+        </div>
+      </div>
+
+
+      <!-- LOGO -->
+      <div class="logo-container">
+        <img
+          class="logo"
+          src="https://www.figma.com/api/mcp/asset/a1b8ac0d-4109-420a-b993-619470fab5da.png"
+          alt="ATOZRY Logo"
+        >
+      </div>
+
+
+      <!-- WELCOME -->
+      <h1 class="welcome">
+        Welcome back! 👋
+      </h1>
+
+
+      <!-- EMAIL -->
+      <div class="input-box email-box">
+
+        <img
+          class="email-icon"
+          src="https://www.figma.com/api/mcp/asset/4986e5c0-b47c-469d-8bb9-12c9b7bd86bf.svg"
+          alt=""
+        >
+
+        <input
+          id="email"
+          type="text"
+          placeholder="Email or Username"
+          autocomplete="username"
+        >
+
+      </div>
+
+
+      <!-- PASSWORD -->
+      <div class="input-box password-box">
+
+        <img
+          class="lock-icon"
+          src="https://www.figma.com/api/mcp/asset/14cc18b5-dced-4b44-9e73-6e1efb3d7f23.svg"
+          alt=""
+        >
+
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          autocomplete="current-password"
+        >
+
+        <button
+          class="password-toggle"
+          id="passwordToggle"
+          type="button"
+          aria-label="Show password"
+        >
+
+          <span class="eye-icon">
+
+            <img
+              src="https://www.figma.com/api/mcp/asset/bc681f31-aa6f-4200-a882-9982d9682b81.svg"
+              alt=""
+            >
+
+            <img
+              class="eye-line"
+              src="https://www.figma.com/api/mcp/asset/2425a8b6-347a-43ec-b313-231804dd813a.svg"
+              alt=""
+            >
+
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- FORGOT PASSWORD -->
+      <button
+        class="forgot-password"
+        id="forgotPassword"
+        type="button"
+      >
+        Forget password?
+      </button>
+
+
+      <!-- LOGIN -->
+      <button
+        class="login-button"
+        id="loginButton"
+        type="button"
+      >
+        Log in
+      </button>
+
+
+      <!-- DIVIDER -->
+      <div class="continue-divider">
+
+        <img
+          class="divider-line left-line"
+          src="https://www.figma.com/api/mcp/asset/63555eef-4b9d-4093-815f-5995823b36b5.svg"
+          alt=""
+        >
+
+        <span>or continue with</span>
+
+        <img
+          class="divider-line right-line"
+          src="https://www.figma.com/api/mcp/asset/2f064cd9-5044-465a-ad22-e7dabc40a05a.svg"
+          alt=""
+        >
+
+      </div>
+
+
+      <!-- GOOGLE -->
+      <button
+        class="social-button google-button"
+        id="googleButton"
+        type="button"
+      >
+
+        <img
+          src="https://www.figma.com/api/mcp/asset/6a1c69a7-a5c3-48f0-91b9-70a929c95c2d.svg"
+          alt="Google"
+        >
+
+        <span>Google</span>
+
+      </button>
+
+
+      <!-- GITHUB -->
+      <button
+        class="social-button github-button"
+        id="githubButton"
+        type="button"
+      >
+
+        <img
+          src="https://www.figma.com/api/mcp/asset/a8ad1cb7-340f-4ebf-8a21-0ad729422569.svg"
+          alt="Github"
+        >
+
+        <span>Github</span>
+
+      </button>
+
+
+      <!-- LINKEDIN -->
+      <button
+        class="social-button linkedin-button"
+        id="linkedinButton"
+        type="button"
+      >
+
+        <img
+          src="https://www.figma.com/api/mcp/asset/19ec14cc-2690-4bbf-9c2d-d62929383b54.svg"
+          alt="Linkedin"
+        >
+
+        <span>Linkedin</span>
+
+      </button>
+
+    </main>
+
+  </div>
+
+
+  <script>
+    /* =========================
+       PASSWORD SHOW / HIDE
+    ========================= */
+
+    const passwordInput = document.getElementById("password");
+    const passwordToggle = document.getElementById("passwordToggle");
+
+    let passwordVisible = false;
+
+    passwordToggle.addEventListener("click", function () {
+
+      passwordVisible = !passwordVisible;
+
+      passwordInput.type =
+        passwordVisible ? "text" : "password";
+
+      passwordToggle.setAttribute(
+        "aria-label",
+        passwordVisible
+          ? "Hide password"
+          : "Show password"
+      );
+
+    });
+
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
+    document
+      .getElementById("loginButton")
+      .addEventListener("click", function () {
+
+        const email =
+          document.getElementById("email").value.trim();
+
+        const password =
+          document.getElementById("password").value.trim();
+
+        if (!email || !password) {
+
+          alert(
+            "Please enter your email/username and password."
+          );
+
+          return;
+        }
+
+        console.log("Login:", {
+          email,
+          password
+        });
+
+        alert("Login button clicked!");
+      });
+
+
+    /* =========================
+       FORGOT PASSWORD
+    ========================= */
+
+    document
+      .getElementById("forgotPassword")
+      .addEventListener("click", function () {
+
+        alert("Forgot password page will be connected later.");
+
+      });
+
+
+    /* =========================
+       SOCIAL BUTTONS
+    ========================= */
+
+    document
+      .getElementById("googleButton")
+      .addEventListener("click", function () {
+
+        console.log("Google login clicked");
+
+      });
+
+
+    document
+      .getElementById("githubButton")
+      .addEventListener("click", function () {
+
+        console.log("Github login clicked");
+
+      });
+
+
+    document
+      .getElementById("linkedinButton")
+      .addEventListener("click", function () {
+
+        console.log("LinkedIn login clicked");
+
+      });
+  </script>
+
+</body>
+</html>

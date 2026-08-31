@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>ATOZRY - Learning Path</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    background:#000;
+    font-family:Inter,Arial,sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    overflow-x:hidden;
+}
+
+.app{
+    position:relative;
+    width:400px;
+    min-height:1534px;
+    background:#0a0e1a;
+    color:white;
+    overflow:hidden;
+}
+
+/* =========================
+   TOP STATUS BAR
+========================= */
+
+.status{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.time{
+    position:absolute;
+    left:35px;
+    top:16px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.dynamic-island{
+    position:absolute;
+    top:9px;
+    left:91px;
+    width:82px;
+    height:27px;
+    background:#000;
+    border-radius:30px;
+}
+
+.signal{
+    position:absolute;
+    right:43px;
+    top:17px;
+    display:flex;
+    gap:3px;
+    align-items:flex-end;
+}
+
+.signal span{
+    width:3px;
+    background:#fff;
+    border-radius:2px;
+}
+
+.signal span:nth-child(1){height:5px}
+.signal span:nth-child(2){height:7px}
+.signal span:nth-child(3){height:9px}
+.signal span:nth-child(4){height:11px}
+
+.battery{
+    position:absolute;
+    right:19px;
+    top:17px;
+    width:18px;
+    height:10px;
+    border:1px solid white;
+    border-radius:3px;
+}
+
+.battery:after{
+    content:"";
+    position:absolute;
+    right:-3px;
+    top:2px;
+    width:2px;
+    height:5px;
+    background:white;
+    border-radius:1px;
+}
+
+.battery:before{
+    content:"";
+    position:absolute;
+    left:2px;
+    top:2px;
+    width:12px;
+    height:6px;
+    background:white;
+    border-radius:1px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.title{
+    position:absolute;
+    left:25px;
+    top:79px;
+    font-size:20px;
+    line-height:normal;
+    font-weight:700;
+}
+
+.subtitle{
+    position:absolute;
+    left:25px;
+    top:112px;
+    font-size:11px;
+    font-weight:400;
+}
+
+.streak{
+    position:absolute;
+    left:305px;
+    top:93px;
+    width:55px;
+    height:32px;
+    background:#202c40;
+    border-radius:25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    font-size:13px;
+}
+
+.streak-fire{
+    color:#ff9f00;
+    font-size:14px;
+}
+
+/* =========================
+   HERO IMAGE
+========================= */
+
+.hero{
+    position:absolute;
+    left:20px;
+    top:161px;
+    width:350px;
+    height:48px;
+    border-radius:20px;
+    overflow:hidden;
+    background:#d9d9d9;
+}
+
+.hero img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transform:scale(1.1075);
+}
+
+/* =========================
+   LANGUAGE
+========================= */
+
+.choose{
+    position:absolute;
+    left:11px;
+    top:235px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.languages{
+    position:absolute;
+    left:8px;
+    top:263px;
+    height:37px;
+    display:flex;
+    gap:5px;
+}
+
+.lang{
+    position:relative;
+    width:94px;
+    height:37px;
+    background:#202c40;
+    border-radius:50px;
+    display:flex;
+    align-items:center;
+    padding-left:10px;
+    gap:7px;
+    font-size:11px;
+}
+
+.lang.active{
+    background:#102b44;
+    border:2px solid #35a7ff;
+}
+
+.lang-icon{
+    width:23px;
+    height:23px;
+    flex-shrink:0;
+}
+
+.lang-icon img{
+    width:100%;
+    height:100%;
+}
+
+.py-text{
+    color:#00d5d6;
+    font-weight:500;
+}
+
+.c-text{
+    color:#33a0f6;
+    font-weight:600;
+}
+
+.java-text{
+    color:#eca750;
+}
+
+.light{
+    font-weight:300;
+}
+
+.semibold{
+    font-weight:600;
+}
+
+/* =========================
+   SCROLL BAR
+========================= */
+
+.scrollbar{
+    position:absolute;
+    left:8px;
+    top:308px;
+    width:388px;
+    height:20px;
+    background:#d9d9d9;
+}
+
+.scroll-track{
+    position:absolute;
+    left:21px;
+    top:4px;
+    width:275px;
+    height:11px;
+    background:#8b8b8b;
+    border-radius:50px;
+}
+
+.scroll-left,
+.scroll-right{
+    position:absolute;
+    top:2px;
+    font-size:14px;
+    color:#555;
+}
+
+.scroll-left{left:3px}
+.scroll-right{right:3px}
+
+/* =========================
+   CURRENT LESSON
+========================= */
+
+.current-label{
+    position:absolute;
+    left:33px;
+    top:380px;
+    color:#2569a1;
+    font-size:10px;
+    font-weight:500;
+}
+
+.current-card{
+    position:absolute;
+    left:22px;
+    top:365px;
+    width:352px;
+    height:186px;
+    border-radius:20px;
+    background:#111927;
+    overflow:hidden;
+}
+
+.current-card-inner{
+    position:absolute;
+    left:8px;
+    top:41px;
+}
+
+.current-icon{
+    position:absolute;
+    left:0;
+    top:0;
+    width:35px;
+    height:35px;
+}
+
+.current-icon img{
+    width:100%;
+    height:100%;
+}
+
+.current-py{
+    position:absolute;
+    left:11px;
+    top:11px;
+    color:#00d5d6;
+    font-size:10px;
+}
+
+.current-title{
+    position:absolute;
+    left:42px;
+    top:3px;
+    font-size:14px;
+    white-space:nowrap;
+}
+
+.current-description{
+    position:absolute;
+    left:42px;
+    top:20px;
+    font-size:9px;
+    white-space:nowrap;
+}
+
+.badges{
+    position:absolute;
+    left:6px;
+    top:46px;
+    display:flex;
+    gap:7px;
+}
+
+.badge{
+    height:21px;
+    min-width:54px;
+    padding:0 7px;
+    border-radius:50px;
+    background:#202c40;
+    color:#8c99ab;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:7px;
+}
+
+.badge.xp{
+    background:#162d49;
+    color:#35a7ff;
+}
+
+.start{
+    position:absolute;
+    left:23px;
+    top:124px;
+    width:308px;
+    height:40px;
+    background:#35a7ff;
+    border-radius:50px;
+    border:none;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.start span{
+    color:#000;
+}
+
+/* =========================
+   ROADMAP
+========================= */
+
+.roadmap-title{
+    position:absolute;
+    left:14px;
+    top:591px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.roadmap{
+    position:absolute;
+    left:0;
+    top:620px;
+    width:400px;
+}
+
+.lesson{
+    position:absolute;
+    left:19px;
+    width:365px;
+    min-height:78px;
+}
+
+.lesson:nth-child(1){top:0}
+.lesson:nth-child(2){top:97px}
+.lesson:nth-child(3){top:194px}
+.lesson:nth-child(4){top:291px}
+.lesson:nth-child(5){top:388px}
+.lesson:nth-child(6){top:485px}
+.lesson:nth-child(7){top:582px}
+.lesson:nth-child(8){top:679px}
+.lesson:nth-child(9){top:776px}
+
+.node{
+    position:absolute;
+    left:0;
+    top:0;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:3;
+}
+
+.node.completed{
+    background:#35a7ff;
+}
+
+.node.current{
+    background:#102b44;
+    border:1px solid #35a7ff;
+}
+
+.node.locked{
+    background:#121826;
+    border:1px solid #606a78;
+}
+
+.check{
+    font-size:15px;
+    font-weight:bold;
+}
+
+.play{
+    font-size:11px;
+    color:#35a7ff;
+}
+
+.lock{
+    font-size:12px;
+    color:#8c99ab;
+}
+
+.lesson-info{
+    position:absolute;
+    left:34px;
+    top:1px;
+    width:300px;
+}
+
+.lesson-name{
+    font-size:11px;
+    font-weight:600;
+    line-height:normal;
+    white-space:nowrap;
+}
+
+.lesson-desc{
+    margin-top:2px;
+    font-size:10px;
+    line-height:normal;
+    white-space:nowrap;
+}
+
+.lesson-meta{
+    margin-top:3px;
+    font-size:9px;
+    color:#fff;
+}
+
+.lesson-arrow{
+    position:absolute;
+    right:3px;
+    top:5px;
+    font-size:15px;
+    color:#fff;
+}
+
+/* vertical connecting line */
+
+.roadmap:before{
+    content:"";
+    position:absolute;
+    left:34px;
+    top:30px;
+    width:1px;
+    height:747px;
+    background:#777;
+    z-index:1;
+}
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav{
+    position:absolute;
+    left:1px;
+    top:1470px;
+    width:400px;
+    height:64px;
+    background:#121826;
+    border-radius:30px 30px 0 0;
+    display:flex;
+    justify-content:space-around;
+    padding-top:10px;
+}
+
+.nav-item{
+    width:70px;
+    text-align:center;
+    color:white;
+    text-decoration:none;
+    font-size:11px;
+}
+
+.nav-icon{
+    height:22px;
+    font-size:19px;
+    margin-bottom:3px;
+}
+
+.nav-item.active{
+    color:#35a7ff;
+}
+
+.nav-item.learn{
+    color:#8c99ab;
+}
+
+.nav-item:hover{
+    opacity:.8;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:400px){
+    .app{
+        width:100vw;
+        min-height:1534px;
+    }
+}
+
+@media(min-width:401px){
+    body{
+        padding-top:20px;
+        padding-bottom:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- STATUS BAR -->
+    <div class="status">
+        <div class="time">9:41</div>
+        <div class="dynamic-island"></div>
+
+        <div class="signal">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="battery"></div>
+    </div>
+
+
+    <!-- HEADER -->
+    <div class="title">Learning path</div>
+
+    <div class="subtitle">
+        Master python step by step, A to Z.
+    </div>
+
+    <div class="streak">
+        <span class="streak-fire">🔥</span>
+        <span>0</span>
+    </div>
+
+
+    <!-- HERO -->
+    <div class="hero">
+        <img src="https://www.figma.com/api/mcp/asset/f9c8666b-1ddd-4c6e-9af9-94c73597d935.png">
+    </div>
+
+
+    <!-- LANGUAGE -->
+    <div class="choose">
+        Choose a language
+    </div>
+
+    <div class="languages">
+
+        <div class="lang active">
+            <div class="lang-icon">
+                <img src="https://www.figma.com/api/mcp/asset/c6e5e1e5-14cc-4dc9-b156-c157892c02e8.svg">
+            </div>
+
+            <span class="py-text">Py</span>
+            <span class="semibold">Python</span>
+        </div>
+
+        <div class="lang">
+            <div class="lang-icon">
+                <img src="https://www.figma.com/api/mcp/asset/bf41a31a-0cb5-484f-a47c-dee3c4061ed5.svg">
+            </div>
+
+            <span class="c-text">C</span>
+        </div>
+
+        <div class="lang">
+            <div class="lang-icon">
+                <img src="https://www.figma.com/api/mcp/asset/bbedb808-4f0e-4d43-9d5e-c9fcf08a1f0f.svg">
+            </div>
+
+            <span class="light">C+</span>
+            <span class="light">C++</span>
+        </div>
+
+        <div class="lang">
+            <div class="lang-icon">
+                <img src="https://www.figma.com/api/mcp/asset/0f5e9b3b-ec6b-4c32-8266-c0c823c4e0f4.svg">
+            </div>
+
+            <span class="java-text">Ja</span>
+            <span class="light">Java</span>
+        </div>
+
+    </div>
+
+
+    <!-- SCROLL BAR -->
+    <div class="scrollbar">
+        <span class="scroll-left">◀</span>
+
+        <div class="scroll-track"></div>
+
+        <span class="scroll-right">▶</span>
+    </div>
+
+
+    <!-- CURRENT LESSON -->
+    <div class="current-label">
+        Current Lesson
+    </div>
+
+    <div class="current-card">
+
+        <div class="current-card-inner">
+
+            <div class="current-icon">
+                <img src="https://www.figma.com/api/mcp/asset/40cd91cf-5dfa-4dff-8849-7e1379952a5e.svg">
+                <span class="current-py">Py</span>
+            </div>
+
+            <div class="current-title">
+                7. Data structures
+            </div>
+
+            <div class="current-description">
+                Work with collections of values
+            </div>
+
+            <div class="badges">
+
+                <div class="badge">
+                    ◷ 32 min
+                </div>
+
+                <div class="badge xp">
+                    ⚡ +110 XP
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="start" onclick="startLesson()">
+            <span>▶</span> Start Lesson
+        </button>
+
+    </div>
+
+
+    <!-- ROADMAP TITLE -->
+    <div class="roadmap-title">
+        Python roadmap
+    </div>
+
+
+    <!-- ROADMAP -->
+    <div class="roadmap">
+
+        <!-- 1 -->
+        <div class="lesson">
+            <div class="node completed">
+                <span class="check">✓</span>
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">1. Basics</div>
+                <div class="lesson-desc">
+                    Syntax, structure, and your first program.
+                </div>
+                <div class="lesson-meta">
+                    15 min&nbsp;&nbsp;·&nbsp;&nbsp;+ 50 XP
+                </div>
+            </div>
+
+            <div class="lesson-arrow">›</div>
+        </div>
+
+
+        <!-- 2 -->
+        <div class="lesson">
+            <div class="node completed">
+                <span class="check">✓</span>
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">
+                    2. Variables &amp; Data Types
+                </div>
+                <div class="lesson-desc">
+                    Syntax, structure, and your first program.
+                </div>
+                <div class="lesson-meta">
+                    20 min&nbsp;&nbsp;·&nbsp;&nbsp;+ 60 XP
+                </div>
+            </div>
+
+            <div class="lesson-arrow">›</div>
+        </div>
+
+
+        <!-- 3 -->
+        <div class="lesson">
+            <div class="node completed">
+                <span class="check">✓</span>
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">3. Operators</div>
+                <div class="lesson-desc">
+                    Perform arithmetic and logical operations.
+                </div>
+                <div class="lesson-meta">
+                    18 min&nbsp;&nbsp;·&nbsp;&nbsp;+ 55 XP
+                </div>
+            </div>
+
+            <div class="lesson-arrow">›</div>
+        </div>
+
+
+        <!-- 4 -->
+        <div class="lesson">
+            <div class="node completed">
+                <span class="check">✓</span>
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">4. Conditions</div>
+                <div class="lesson-desc">
+                    Make decisions with if / else branches.
+                </div>
+                <div class="lesson-meta">
+                    15 min&nbsp;&nbsp;·&nbsp;&nbsp;+ 50 XP
+                </div>
+            </div>
+
+            <div class="lesson-arrow">›</div>
+        </div>
+
+
+        <!-- 5 -->
+        <div class="lesson">
+            <div class="node completed">
+                <span class="check">✓</span>
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">5. Loops</div>
+                <div class="lesson-desc">
+                    Repeat tasks with for and while loops.
+                </div>
+                <div class="lesson-meta">
+                    25 min&nbsp;&nbsp;·&nbsp;&nbsp;+ 80 XP
+                </div>
+            </div>
+
+            <div class="lesson-arrow">›</div>
+        </div>
+
+
+        <!-- 6 -->
+        <div class="lesson">
+            <div class="node completed">
+                <span class="check">✓</span>
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">6. Functions</div>
+                <div class="lesson-desc">
+                    Reuse code with parameters and returns
+                </div>
+                <div class="lesson-meta">
+                    28 min&nbsp;&nbsp;·&nbsp;&nbsp;+ 90 XP
+                </div>
+            </div>
+
+            <div class="lesson-arrow">›</div>
+        </div>
+
+
+        <!-- 7 -->
+        <div class="lesson">
+            <div class="node current">
+                <span class="play">▶</span>
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">7. Data Structures</div>
+                <div class="lesson-desc">
+                    Work with collections of values.
+                </div>
+                <div class="lesson-meta">
+                    32 min&nbsp;&nbsp;·&nbsp;&nbsp;+ 110 XP
+                </div>
+            </div>
+
+            <div class="lesson-arrow">›</div>
+        </div>
+
+
+        <!-- 8 -->
+        <div class="lesson">
+            <div class="node locked">
+                <span class="lock">▢</span>
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">8. OOP</div>
+                <div class="lesson-desc">
+                    Complete the previous lessons to unlock
+                </div>
+                <div class="lesson-meta">
+                    35 min&nbsp;&nbsp;·&nbsp;&nbsp;+ 130 XP
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 9 -->
+        <div class="lesson">
+            <div class="node locked">
+                <span class="lock">▢</span>
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">
+                    9. Advanced Concepts
+                </div>
+                <div class="lesson-desc">
+                    Complete the precious lesson to unlock
+                </div>
+                <div class="lesson-meta">
+                    40 min&nbsp;&nbsp;·&nbsp;&nbsp;+ 150 XP
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="bottom-nav">
+
+        <a href="#" class="nav-item active">
+            <div class="nav-icon">⌂</div>
+            <div>Home</div>
+        </a>
+
+        <a href="#" class="nav-item learn">
+            <div class="nav-icon">▣</div>
+            <div>Learn</div>
+        </a>
+
+        <a href="#" class="nav-item">
+            <div class="nav-icon">⚔</div>
+            <div>Challenges</div>
+        </a>
+
+        <a href="#" class="nav-item">
+            <div class="nav-icon">♕</div>
+            <div>Leaderboard</div>
+        </a>
+
+        <a href="#" class="nav-item">
+            <div class="nav-icon">♙</div>
+            <div>Profile</div>
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* Start Lesson */
+function startLesson(){
+    alert("Starting Data Structures lesson...");
+}
+
+
+/* Language buttons */
+document.querySelectorAll(".lang").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document.querySelectorAll(".lang")
+            .forEach(item => item.classList.remove("active"));
+
+        button.classList.add("active");
+
+    });
+
+});
+
+
+/* Bottom navigation */
+document.querySelectorAll(".nav-item").forEach(item => {
+
+    item.addEventListener("click", function(e){
+
+        e.preventDefault();
+
+        document.querySelectorAll(".nav-item")
+            .forEach(nav => nav.classList.remove("active"));
+
+        this.classList.add("active");
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+  <title>ATOZRY - Leaderboard</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background: #02060d;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+      color: white;
+    }
+
+    button,
+    a {
+      font-family: inherit;
+    }
+
+    button {
+      border: 0;
+      outline: none;
+    }
+
+    /* ========================================
+       PAGE
+    ======================================== */
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #02060d;
+    }
+
+    .leaderboard-screen {
+      position: relative;
+      width: 400px;
+      height: 874px;
+      overflow: hidden;
+      flex-shrink: 0;
+
+      background:
+        linear-gradient(
+          to bottom,
+          #202c40 4.327%,
+          rgba(8, 19, 37, 0.82) 18.269%,
+          #070c15 62.019%
+        );
+    }
+
+    /* ========================================
+       STATUS BAR
+    ======================================== */
+
+    .status-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 400px;
+      height: 62px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+    }
+
+    .status-time {
+      position: absolute;
+      left: 53px;
+      top: 21px;
+      color: #f4f7fb;
+      font-size: 17px;
+      line-height: 20px;
+      font-weight: 500;
+    }
+
+    .dynamic-island {
+      position: absolute;
+      top: 14px;
+      left: 140px;
+      width: 125px;
+      height: 37px;
+      background: #000;
+      border-radius: 22px;
+    }
+
+    .status-icons {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    /* SIGNAL */
+
+    .signal {
+      width: 22px;
+      height: 16px;
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .signal i {
+      display: block;
+      width: 3px;
+      background: #fff;
+      border-radius: 3px;
+    }
+
+    .signal i:nth-child(1) {
+      height: 5px;
+    }
+
+    .signal i:nth-child(2) {
+      height: 8px;
+    }
+
+    .signal i:nth-child(3) {
+      height: 11px;
+    }
+
+    .signal i:nth-child(4) {
+      height: 14px;
+    }
+
+    /* WIFI */
+
+    .wifi {
+      position: relative;
+      width: 17px;
+      height: 14px;
+    }
+
+    .wifi::before,
+    .wifi::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 2px solid white;
+      border-color: white transparent transparent transparent;
+      border-radius: 50%;
+    }
+
+    .wifi::before {
+      top: -1px;
+      width: 18px;
+      height: 14px;
+    }
+
+    .wifi::after {
+      top: 3px;
+      width: 11px;
+      height: 9px;
+    }
+
+    .wifi span {
+      position: absolute;
+      left: 50%;
+      top: 7px;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    /* BATTERY */
+
+    .battery {
+      position: relative;
+      width: 25px;
+      height: 12px;
+      border: 2px solid white;
+      border-radius: 4px;
+    }
+
+    .battery::after {
+      content: "";
+      position: absolute;
+      right: -4px;
+      top: 3px;
+      width: 2px;
+      height: 5px;
+      background: white;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .battery span {
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: 17px;
+      height: 6px;
+      background: white;
+      border-radius: 2px;
+    }
+
+    /* ========================================
+       HEADER
+    ======================================== */
+
+    .header {
+      position: absolute;
+      left: 36px;
+      top: 91px;
+    }
+
+    .header h1 {
+      width: 201px;
+      height: 46px;
+      color: #fff;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 36px;
+    }
+
+    .header p {
+      margin-top: -1px;
+      color: #8b98ab;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: normal;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       LEADERBOARD CARDS
+    ======================================== */
+
+    .leaderboard-card {
+      position: absolute;
+      left: 36px;
+      width: 335px;
+      height: 77px;
+
+      background: rgba(12, 20, 34, 0.44);
+      border: 0.8px solid #373636;
+      border-radius: 18px;
+
+      overflow: hidden;
+    }
+
+    .card-1 {
+      top: 199px;
+    }
+
+    .card-2 {
+      top: 289px;
+    }
+
+    .card-3 {
+      top: 379px;
+    }
+
+    .card-4 {
+      top: 469px;
+
+      background: rgba(20, 34, 59, 0.44);
+      border-color: #00336e;
+
+      box-shadow:
+        4px 4px 20px 1px rgba(0, 177, 255, 0.18),
+        0 0 4px 1px rgba(0, 149, 255, 0.09);
+    }
+
+    .card-5 {
+      top: 559px;
+    }
+
+    .card-6 {
+      top: 649px;
+    }
+
+    /* ========================================
+       RANK CIRCLE
+    ======================================== */
+
+    .rank-circle {
+      position: absolute;
+      left: 13.2px;
+      top: 21.2px;
+      width: 36px;
+      height: 34px;
+      border-radius: 100px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background: rgba(56, 189, 248, 0.34);
+    }
+
+    .card-1 .rank-circle {
+      background: rgba(56, 189, 248, 0.62);
+    }
+
+    .card-4 .rank-circle {
+      background: rgba(56, 189, 248, 0.31);
+    }
+
+    .card-5 .rank-circle {
+      background: rgba(56, 189, 248, 0.31);
+    }
+
+    .card-6 .rank-circle {
+      background: rgba(0, 177, 255, 0.18);
+    }
+
+    .rank-number {
+      color: #fff;
+      font-size: 15px;
+      line-height: normal;
+      font-weight: 700;
+    }
+
+    .crown {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ========================================
+       PLAYER NAME
+    ======================================== */
+
+    .player-name {
+      position: absolute;
+      left: 56.2px;
+      top: 17.2px;
+
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: normal;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       STREAK
+    ======================================== */
+
+    .streak-icon {
+      position: absolute;
+      left: 56.2px;
+      top: 41.2px;
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .streak-text {
+      position: absolute;
+      left: 78.2px;
+      top: 43.2px;
+
+      color: #808080;
+      font-size: 9px;
+      font-weight: 500;
+      line-height: normal;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       XP
+    ======================================== */
+
+    .xp {
+      position: absolute;
+      left: 257.2px;
+      top: 30.2px;
+
+      color: #00c8ff;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: normal;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       YOU LABEL
+    ======================================== */
+
+    .you-label {
+      position: absolute;
+      left: 181.2px;
+      top: 20.2px;
+
+      color: #38bdf8;
+      font-size: 9px;
+      font-weight: 700;
+      line-height: normal;
+      white-space: nowrap;
+    }
+
+    /* ========================================
+       BOTTOM NAVIGATION
+    ======================================== */
+
+    .bottom-nav {
+      position: absolute;
+      left: 1px;
+      top: 797px;
+
+      width: 400px;
+      height: 64px;
+
+      background: #121826;
+      border-radius: 30px;
+
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .nav-item {
+      position: absolute;
+      top: 0;
+      height: 64px;
+      width: 70px;
+
+      background: transparent;
+      color: #f4f7fb;
+
+      cursor: pointer;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .nav-item img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      margin-top: 12px;
+      display: block;
+    }
+
+    .nav-label {
+      margin-top: 5px;
+      font-size: 11px;
+      line-height: normal;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .nav-home {
+      left: 0;
+    }
+
+    .nav-learn {
+      left: 66px;
+    }
+
+    .nav-challenges {
+      left: 146px;
+      width: 90px;
+    }
+
+    .nav-leaderboard {
+      left: 236px;
+      width: 90px;
+      color: #35a7ff;
+    }
+
+    .nav-profile {
+      left: 313px;
+    }
+
+    /* ========================================
+       HOVER / CLICK
+    ======================================== */
+
+    .leaderboard-card {
+      transition:
+        transform 0.15s ease,
+        border-color 0.15s ease;
+    }
+
+    .leaderboard-card:hover {
+      transform: translateY(-1px);
+    }
+
+    .nav-item {
+      transition: transform 0.15s ease;
+    }
+
+    .nav-item:active {
+      transform: scale(0.94);
+    }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+
+    @media (max-width: 400px) {
+      .leaderboard-screen {
+        width: 100vw;
+        min-height: 874px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <main class="leaderboard-screen">
+
+      <!-- =============================
+           STATUS BAR
+      ============================== -->
+
+      <div class="status-bar">
+
+        <span class="status-time">9:41</span>
+
+        <div class="dynamic-island"></div>
+
+        <div class="status-icons">
+
+          <span class="signal">
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+
+          <span class="wifi">
+            <span></span>
+          </span>
+
+          <span class="battery">
+            <span></span>
+          </span>
+
+        </div>
+      </div>
+
+
+      <!-- =============================
+           HEADER
+      ============================== -->
+
+      <header class="header">
+
+        <h1>Leaderboard</h1>
+
+        <p>
+          You are level 6 with 620 XP this season
+        </p>
+
+      </header>
+
+
+      <!-- =============================
+           1ST
+      ============================== -->
+
+      <div class="leaderboard-card card-1">
+
+        <div class="rank-circle">
+          <img
+            class="crown"
+            src="https://www.figma.com/api/mcp/asset/983735d5-8cd3-4889-ab74-3cc0959030dd.svg"
+            alt="Crown"
+          />
+        </div>
+
+        <p class="player-name">
+          Lionel Andrés Messi
+        </p>
+
+        <img
+          class="streak-icon"
+          src="https://www.figma.com/api/mcp/asset/b961f7a6-4d82-4cd2-8259-481c6a822d02.svg"
+          alt=""
+        />
+
+        <p class="streak-text">
+          21 day streak
+        </p>
+
+        <p class="xp">
+          1420 XP
+        </p>
+
+      </div>
+
+
+      <!-- =============================
+           2ND
+      ============================== -->
+
+      <div class="leaderboard-card card-2">
+
+        <div class="rank-circle">
+          <span class="rank-number">2</span>
+        </div>
+
+        <p class="player-name">
+          Abhishek Adhakari
+        </p>
+
+        <img
+          class="streak-icon"
+          src="https://www.figma.com/api/mcp/asset/b961f7a6-4d82-4cd2-8259-481c6a822d02.svg"
+          alt=""
+        />
+
+        <p class="streak-text">
+          19 day streak
+        </p>
+
+        <p class="xp">
+          1180 XP
+        </p>
+
+      </div>
+
+
+      <!-- =============================
+           3RD
+      ============================== -->
+
+      <div class="leaderboard-card card-3">
+
+        <div class="rank-circle">
+          <span class="rank-number">3</span>
+        </div>
+
+        <p class="player-name">
+          Abhishek Adhakari
+        </p>
+
+        <img
+          class="streak-icon"
+          src="https://www.figma.com/api/mcp/asset/b961f7a6-4d82-4cd2-8259-481c6a822d02.svg"
+          alt=""
+        />
+
+        <p class="streak-text">
+          15 day streak
+        </p>
+
+        <p class="xp">
+          960 XP
+        </p>
+
+      </div>
+
+
+      <!-- =============================
+           4TH / YOU
+      ============================== -->
+
+      <div class="leaderboard-card card-4">
+
+        <div class="rank-circle">
+          <span class="rank-number">4</span>
+        </div>
+
+        <p class="player-name">
+          Prashant Shrestha
+        </p>
+
+        <span class="you-label">
+          You
+        </span>
+
+        <img
+          class="streak-icon"
+          src="https://www.figma.com/api/mcp/asset/b961f7a6-4d82-4cd2-8259-481c6a822d02.svg"
+          alt=""
+        />
+
+        <p class="streak-text">
+          11 day streak
+        </p>
+
+        <p class="xp">
+          620 XP
+        </p>
+
+      </div>
+
+
+      <!-- =============================
+           5TH
+      ============================== -->
+
+      <div class="leaderboard-card card-5">
+
+        <div class="rank-circle">
+          <span class="rank-number">5</span>
+        </div>
+
+        <p class="player-name">
+          Aman Gurung
+        </p>
+
+        <img
+          class="streak-icon"
+          src="https://www.figma.com/api/mcp/asset/b961f7a6-4d82-4cd2-8259-481c6a822d02.svg"
+          alt=""
+        />
+
+        <p class="streak-text">
+          07 day streak
+        </p>
+
+        <p class="xp">
+          490 XP
+        </p>
+
+      </div>
+
+
+      <!-- =============================
+           6TH
+      ============================== -->
+
+      <div class="leaderboard-card card-6">
+
+        <div class="rank-circle">
+          <span class="rank-number">6</span>
+        </div>
+
+        <p class="player-name">
+          Abhishek Adhakari
+        </p>
+
+        <img
+          class="streak-icon"
+          src="https://www.figma.com/api/mcp/asset/b961f7a6-4d82-4cd2-8259-481c6a822d02.svg"
+          alt=""
+        />
+
+        <p class="streak-text">
+          05 day streak
+        </p>
+
+        <p class="xp">
+          180 XP
+        </p>
+
+      </div>
+
+
+      <!-- =============================
+           BOTTOM NAV
+      ============================== -->
+
+      <nav class="bottom-nav">
+
+        <!-- HOME -->
+
+        <button
+          class="nav-item nav-home"
+          type="button"
+          onclick="navigateTo('home')"
+        >
+
+          <img
+            src="https://www.figma.com/api/mcp/asset/24c7cffa-5d0e-486d-a9b6-cc7e0c74fb66.svg"
+            alt="Home"
+          />
+
+          <span class="nav-label">
+            Home
+          </span>
+
+        </button>
+
+
+        <!-- LEARN -->
+
+        <button
+          class="nav-item nav-learn"
+          type="button"
+          onclick="navigateTo('learn')"
+        >
+
+          <img
+            src="https://www.figma.com/api/mcp/asset/174ba8c0-6bbb-4807-9762-36c6f40be6a7.svg"
+            alt="Learn"
+          />
+
+          <span class="nav-label">
+            Learn
+          </span>
+
+        </button>
+
+
+        <!-- CHALLENGES -->
+
+        <button
+          class="nav-item nav-challenges"
+          type="button"
+          onclick="navigateTo('challenges')"
+        >
+
+          <img
+            src="https://www.figma.com/api/mcp/asset/3e8d3487-e394-46ff-ad44-2000c2a36c4f.svg"
+            alt="Challenges"
+          />
+
+          <span class="nav-label">
+            Challenges
+          </span>
+
+        </button>
+
+
+        <!-- LEADERBOARD -->
+
+        <button
+          class="nav-item nav-leaderboard"
+          type="button"
+          onclick="navigateTo('leaderboard')"
+        >
+
+          <img
+            src="https://www.figma.com/api/mcp/asset/f0f5c925-16bf-43fd-a598-a407404e7f42.svg"
+            alt="Leaderboard"
+          />
+
+          <span class="nav-label">
+            Leaderboard
+          </span>
+
+        </button>
+
+
+        <!-- PROFILE -->
+
+        <button
+          class="nav-item nav-profile"
+          type="button"
+          onclick="navigateTo('profile')"
+        >
+
+          <img
+            src="https://www.figma.com/api/mcp/asset/c5b56f78-bc24-44ca-8403-eefc88afe037.svg"
+            alt="Profile"
+          />
+
+          <span class="nav-label">
+            Profile
+          </span>
+
+        </button>
+
+      </nav>
+
+    </main>
+
+  </div>
+
+
+  <script>
+    /*
+      Navigation placeholder.
+      Later we can connect these buttons
+      to your other Figma pages.
+    */
+
+    function navigateTo(page) {
+      console.log("Navigate to:", page);
+
+      if (page === "leaderboard") {
+        return;
+      }
+
+      alert(
+        page.charAt(0).toUpperCase() +
+        page.slice(1) +
+        " page will be connected next."
+      );
+    }
+  </script>
+
+</body>
+</html>
