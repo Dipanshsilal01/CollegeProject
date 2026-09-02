@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 2</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #080e1a;
+  color: white;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.app {
+  width: 100%;
+  max-width: 402px;
+  min-height: 897px;
+  background: #080e1a;
+  position: relative;
+  overflow: hidden;
+}
+
+/* STATUS BAR */
+
+.status-bar {
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 43px 0 47px;
+}
+
+.time {
+  font-size: 16px;
+  font-weight: 600;
+  color: #b9bdc5;
+}
+
+.dynamic-island {
+  width: 125px;
+  height: 38px;
+  background: #000;
+  border-radius: 30px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20px;
+}
+
+.status-icons {
+  color: #dce1e8;
+  font-size: 16px;
+}
+
+/* HEADER */
+
+.header {
+  padding: 12px 30px 0 45px;
+  position: relative;
+}
+
+.back {
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #162131;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.header p {
+  font-size: 12px;
+  color: #e6e6e6;
+}
+
+.py {
+  position: absolute;
+  right: 32px;
+  top: 4px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #164052;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00d5d6;
+  font-size: 11px;
+}
+
+/* LESSON CARD */
+
+.lesson-card {
+  margin: 31px 30px 0 21px;
+  width: 351px;
+  height: 110px;
+  background: #111926;
+  border-radius: 30px;
+  padding: 17px 18px;
+}
+
+.lesson-card h2 {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.description {
+  margin-top: 11px;
+  font-size: 11px;
+  color: white;
+}
+
+.tags {
+  margin-top: 13px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.tag {
+  height: 21px;
+  border-radius: 50px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+}
+
+.time-tag {
+  background: #080e1a;
+  color: white;
+}
+
+.xp-tag {
+  background: #162d49;
+  color: #35a7ff;
+  gap: 3px;
+}
+
+.completed {
+  background: #2c274e;
+  color: purple;
+  font-weight: 700;
+}
+
+/* PROGRESS */
+
+.progress-section {
+  margin-top: 42px;
+  padding-left: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.progress {
+  width: 290px;
+  height: 10px;
+  background: #0f1523;
+  border-radius: 45px;
+}
+
+.hearts {
+  margin-left: 7px;
+  display: flex;
+  gap: 2px;
+  font-size: 15px;
+}
+
+.question-number {
+  font-size: 10px;
+  margin: 40px 0 21px 23px;
+  color: white;
+}
+
+/* QUIZ CARD */
+
+.quiz-card {
+  width: 365px;
+  height: 303px;
+  margin-left: 17px;
+  background: #111926;
+  border-radius: 45px;
+  padding: 25px 18px;
+}
+
+.question {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 27px;
+}
+
+.option {
+  width: 327px;
+  height: 38px;
+  background: #0f1523;
+  border: none;
+  border-radius: 40px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  padding-left: 24px;
+  margin-bottom: 17px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.option:hover {
+  background: #162d49;
+}
+
+.option.selected {
+  background: #183b5a;
+  outline: 1px solid #35a7ff;
+}
+
+/* CHECK BUTTON */
+
+.check-answer {
+  width: 361px;
+  height: 45px;
+  border: none;
+  border-radius: 30px;
+  background: #0f1523;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 27px 0 0 21px;
+  cursor: pointer;
+}
+
+.check-answer:hover {
+  background: #162d49;
+}
+
+.skip {
+  display: block;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  text-decoration: none;
+  margin-top: 13px;
+}
+
+/* BOTTOM NAVIGATION */
+
+.bottom-nav {
+  position: absolute;
+  bottom: 26px;
+  left: 1px;
+  width: 400px;
+  height: 64px;
+  background: #121826;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-item {
+  width: 68px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.nav-icon {
+  display: block;
+  font-size: 20px;
+  height: 25px;
+  color: #8c99ab;
+}
+
+.nav-item.active,
+.nav-item.active .nav-icon {
+  color: #35a7ff;
+}
+
+.nav-item.learn {
+  color: #8c99ab;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 402px) {
+
+  .lesson-card {
+    width: calc(100% - 42px);
+  }
+
+  .quiz-card {
+    width: calc(100% - 34px);
+  }
+
+  .option {
+    width: 100%;
+  }
+
+  .check-answer {
+    width: calc(100% - 42px);
+  }
+
+  .bottom-nav {
+    width: calc(100% - 2px);
+  }
+
+  .hearts {
+    font-size: 13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- STATUS BAR -->
+
+  <div class="status-bar">
+    <div class="time">9:41</div>
+
+    <div class="dynamic-island"></div>
+
+    <div class="status-icons">
+      ▮▮▮ ◔ ▰
+    </div>
+  </div>
+
+
+  <!-- HEADER -->
+
+  <div class="header">
+
+    <div class="back" onclick="goBack()">‹</div>
+
+    <h1>Lesson 2</h1>
+
+    <p>Python : 9 lessons total</p>
+
+    <div class="py">Py</div>
+
+  </div>
+
+
+  <!-- LESSON INFORMATION -->
+
+  <div class="lesson-card">
+
+    <h2>Variables & Data Types</h2>
+
+    <div class="description">
+      Store and manage data in your code.
+    </div>
+
+    <div class="tags">
+
+      <div class="tag time-tag">
+        15 min
+      </div>
+
+      <div class="tag xp-tag">
+        ⚡ +50 XP
+      </div>
+
+      <div class="tag completed">
+        Completed
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PROGRESS -->
+
+  <div class="progress-section">
+
+    <div class="progress"></div>
+
+    <div class="hearts">
+      ❤️ ❤️ ❤️ ❤️ ❤️
+    </div>
+
+  </div>
+
+
+  <!-- QUESTION NUMBER -->
+
+  <div class="question-number">
+    Question 1 of 3
+  </div>
+
+
+  <!-- QUIZ -->
+
+  <div class="quiz-card">
+
+    <div class="question">
+      What is the type of x after x=3.5?
+    </div>
+
+    <button class="option" onclick="selectOption(this, false)">
+      int
+    </button>
+
+    <button class="option" onclick="selectOption(this, true)">
+      float
+    </button>
+
+    <button class="option" onclick="selectOption(this, false)">
+      str
+    </button>
+
+    <button class="option" onclick="selectOption(this, false)">
+      bool
+    </button>
+
+  </div>
+
+
+  <!-- CHECK ANSWER -->
+
+  <button class="check-answer" onclick="checkAnswer()">
+    Check answer
+  </button>
+
+
+  <!-- SKIP -->
+
+  <a href="#" class="skip" onclick="skipLesson()">
+    Skip to lesson 3
+  </a>
+
+
+  <!-- BOTTOM NAVIGATION -->
+
+  <div class="bottom-nav">
+
+    <a href="index.html" class="nav-item active">
+      <span class="nav-icon">⌂</span>
+      Home
+    </a>
+
+    <a href="#" class="nav-item learn">
+      <span class="nav-icon">▱</span>
+      Learn
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">⚔</span>
+      Challenges
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">♜</span>
+      Leaderboard
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">♙</span>
+      Profile
+    </a>
+
+  </div>
+
+</div>
+
+
+<script>
+
+let selectedAnswer = null;
+let correctAnswer = false;
+
+function selectOption(element, isCorrect) {
+
+  document.querySelectorAll(".option").forEach(function(option) {
+    option.classList.remove("selected");
+  });
+
+  element.classList.add("selected");
+
+  selectedAnswer = element;
+  correctAnswer = isCorrect;
+}
+
+
+function checkAnswer() {
+
+  if (!selectedAnswer) {
+    alert("Please select an answer first!");
+    return;
+  }
+
+  if (correctAnswer) {
+
+    selectedAnswer.style.background = "#1c5137";
+    alert("Correct! 🎉");
+
+  } else {
+
+    selectedAnswer.style.background = "#5a252d";
+    alert("Incorrect. Try again!");
+
+  }
+}
+
+
+function skipLesson() {
+  alert("Moving to Lesson 3...");
+}
+
+
+function goBack() {
+  window.history.back();
+}
+
+</script>
+
+</body>
+</html>

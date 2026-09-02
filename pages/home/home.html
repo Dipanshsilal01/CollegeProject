@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ATOZRY</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    background:#050a12;
+    font-family:Inter,Arial,sans-serif;
+    color:#eaf0fa;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    overflow-x:hidden;
+}
+
+.app{
+    position:relative;
+    width:402px;
+    min-height:1480px;
+    background:#0b0f19;
+    overflow:hidden;
+}
+
+/* TOP STATUS BAR */
+.status{
+    height:42px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px 0 36px;
+    font-size:12px;
+    font-weight:600;
+    color:#eaf0fa;
+}
+
+.dynamic-island{
+    position:absolute;
+    top:9px;
+    left:50%;
+    transform:translateX(-50%);
+    width:90px;
+    height:24px;
+    border-radius:20px;
+    background:#000;
+}
+
+/* AMBIENT GLOWS */
+.blue-glow{
+    position:absolute;
+    width:290px;
+    height:239px;
+    right:-10px;
+    top:20px;
+    opacity:.65;
+    pointer-events:none;
+}
+
+.purple-glow{
+    position:absolute;
+    width:250px;
+    height:250px;
+    right:-120px;
+    top:145px;
+    opacity:.45;
+    pointer-events:none;
+}
+
+/* HEADER */
+.header{
+    position:relative;
+    height:98px;
+    padding:20px 24px 0;
+}
+
+.brand-row{
+    display:flex;
+    align-items:center;
+}
+
+.brand{
+    font-size:18px;
+    font-weight:800;
+    color:#eaf2ff;
+}
+
+.tagline{
+    margin-left:8px;
+    width:126px;
+    height:20px;
+    border-radius:10px;
+    background:#123456;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#38bdf8;
+    font-size:8px;
+    font-weight:600;
+}
+
+.profile{
+    position:absolute;
+    right:24px;
+    top:20px;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    overflow:hidden;
+}
+
+.profile img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.profile-letter{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    font-weight:700;
+    color:#08111f;
+}
+
+.greeting{
+    margin-top:20px;
+    font-size:23px;
+    font-weight:800;
+    color:#f1f5fc;
+}
+
+.subtitle{
+    margin-top:4px;
+    font-size:13px;
+    color:#7f8da3;
+}
+
+/* CONTINUE LEARNING */
+.continue{
+    position:relative;
+    margin:0 24px;
+    height:232px;
+    border:1px solid #1d2b43;
+    border-radius:24px;
+    background:#111a2a;
+    padding:23px 19px;
+}
+
+.continue-title{
+    color:#38bdf8;
+    font-size:11px;
+    font-weight:800;
+}
+
+.lesson-badge{
+    position:absolute;
+    top:18px;
+    right:12px;
+    width:64px;
+    height:27px;
+    border-radius:14px;
+    background:#1a2638;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#8b98ab;
+    font-size:8px;
+    font-weight:600;
+}
+
+.lesson{
+    display:flex;
+    align-items:center;
+    margin-top:18px;
+}
+
+.python-icon{
+    width:48px;
+    height:48px;
+    flex-shrink:0;
+}
+
+.python-icon img{
+    width:100%;
+    height:100%;
+}
+
+.lesson-info{
+    margin-left:10px;
+}
+
+.lesson-name{
+    font-size:17px;
+    font-weight:800;
+    color:#eaf0fa;
+}
+
+.lesson-description{
+    margin-top:4px;
+    font-size:11px;
+    color:#7f8da3;
+}
+
+.progress-label{
+    display:flex;
+    justify-content:space-between;
+    margin-top:17px;
+    font-size:10px;
+    font-weight:600;
+    color:#7f8da3;
+}
+
+.progress-label span:last-child{
+    color:#38bdf8;
+}
+
+.progress{
+    height:8px;
+    background:#1b293c;
+    border-radius:8px;
+    margin-top:10px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:67%;
+    background:#38bdf8;
+    border-radius:8px;
+}
+
+.continue-btn{
+    width:100%;
+    height:44px;
+    border:0;
+    border-radius:23px;
+    background:#38bdf8;
+    color:#06111f;
+    font-size:13px;
+    font-weight:800;
+    margin-top:14px;
+    cursor:pointer;
+}
+
+.continue-btn:active{
+    transform:scale(.98);
+}
+
+/* SECTION TITLE */
+.section-title{
+    margin:98px 24px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.section-title h2{
+    font-size:18px;
+    font-weight:800;
+}
+
+.section-title a{
+    font-size:11px;
+    font-weight:800;
+    color:#38bdf8;
+    text-decoration:none;
+}
+
+/* LANGUAGE CAROUSEL */
+.languages-wrap{
+    margin-top:16px;
+    width:100%;
+    overflow:hidden;
+}
+
+.languages{
+    display:flex;
+    gap:12px;
+    width:max-content;
+    padding:0 24px 12px;
+}
+
+.language-card{
+    position:relative;
+    width:143px;
+    height:176px;
+    flex-shrink:0;
+    border:1px solid #202c40;
+    border-radius:22px;
+    background:#111a2a;
+    padding:20px 13px;
+}
+
+.lang-icon{
+    width:42px;
+    height:42px;
+}
+
+.lang-icon img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.lang-short{
+    position:absolute;
+    top:31px;
+    left:13px;
+    width:42px;
+    text-align:center;
+    font-size:14px;
+    font-weight:800;
+}
+
+.python-short{color:#22e6de;}
+.c-short{color:#38bdf8;}
+.cpp-short{color:#b779ff;}
+.java-short{color:#ebd07a;}
+.js-short{color:#967a1a;}
+
+.lang-name{
+    margin-top:19px;
+    font-size:16px;
+    font-weight:800;
+}
+
+.lang-level{
+    margin-top:4px;
+    font-size:10px;
+    color:#8492a6;
+}
+
+.lang-progress{
+    height:7px;
+    margin-top:22px;
+    background:#1b293c;
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.lang-fill{
+    height:100%;
+    background:#38bdf8;
+    border-radius:5px;
+}
+
+.lang-lessons{
+    margin-top:8px;
+    font-size:10px;
+    color:#8492a6;
+    font-weight:600;
+}
+
+.scrollbar{
+    margin:0 24px;
+    height:5px;
+    border-radius:5px;
+    background:#243143;
+}
+
+.scrollbar div{
+    width:63%;
+    height:100%;
+    border-radius:5px;
+    background:#9a9ea6;
+}
+
+/* CHALLENGE */
+.challenge{
+    position:relative;
+    margin:18px 12px 0;
+    height:176px;
+    border:1px solid #4c35a1;
+    border-radius:24px;
+    background:#171a35;
+    padding:13px 13px;
+}
+
+.challenge h2{
+    color:#b779ff;
+    font-size:18px;
+    font-weight:800;
+    margin-left:6px;
+}
+
+.challenge-main{
+    display:flex;
+    align-items:center;
+    margin-top:17px;
+}
+
+.challenge-icon{
+    width:40px;
+    height:40px;
+    flex-shrink:0;
+}
+
+.challenge-icon img{
+    width:100%;
+    height:100%;
+}
+
+.challenge-info{
+    margin-left:12px;
+}
+
+.challenge-name{
+    font-size:16px;
+    font-weight:800;
+}
+
+.difficulty{
+    margin-top:3px;
+    color:#a3aec0;
+    font-size:10px;
+}
+
+.xp{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    height:14px;
+    width:59px;
+    border-radius:13px;
+    background:#3a285e;
+    color:#a855f7;
+    font-size:9px;
+    font-weight:800;
+    margin-left:6px;
+}
+
+.challenge-btn{
+    position:absolute;
+    left:11px;
+    right:11px;
+    bottom:13px;
+    height:45px;
+    border:0;
+    border-radius:23px;
+    background:#f4f8ff;
+    color:#0d1726;
+    font-size:13px;
+    font-weight:800;
+}
+
+/* PROGRESS */
+.progress-section{
+    margin:26px 24px 0;
+}
+
+.progress-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.progress-heading h2{
+    font-size:18px;
+    font-weight:800;
+}
+
+.progress-heading a{
+    font-size:10px;
+    color:#38bdf8;
+    font-weight:800;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px 14px;
+    margin-top:14px;
+}
+
+.stat{
+    height:70px;
+    border:1px solid #202c40;
+    border-radius:20px;
+    background:#111a2a;
+    display:flex;
+    align-items:center;
+    padding:0 13px;
+}
+
+.stat-icon{
+    width:38px;
+    height:38px;
+    flex-shrink:0;
+}
+
+.stat-icon img{
+    width:100%;
+    height:100%;
+}
+
+.stat-text{
+    margin-left:10px;
+}
+
+.stat-value{
+    font-size:18px;
+    font-weight:800;
+    color:#eaf0fa;
+}
+
+.stat-label{
+    margin-top:2px;
+    font-size:9px;
+    color:#8492a6;
+}
+
+/* LEVEL PROGRESS */
+.level-card{
+    margin-top:10px;
+    height:90px;
+    border:1px solid #202c40;
+    border-radius:20px;
+    background:#111a2a;
+    padding:16px 18px;
+}
+
+.level-top{
+    display:flex;
+    justify-content:space-between;
+    font-size:10px;
+    font-weight:800;
+}
+
+.level-top span:last-child{
+    color:#38bdf8;
+}
+
+.level-progress{
+    height:8px;
+    background:#1b293c;
+    border-radius:5px;
+    margin-top:15px;
+    overflow:hidden;
+}
+
+.level-progress div{
+    height:100%;
+    width:63%;
+    background:#38bdf8;
+    border-radius:5px;
+}
+
+/* BUILD */
+.build{
+    position:relative;
+    margin:13px 24px 0;
+    height:90px;
+    border:1px solid #202c40;
+    border-radius:20px;
+    background:#111a2a;
+    padding:11px 18px 11px 103px;
+    overflow:hidden;
+}
+
+.build-img{
+    position:absolute;
+    left:18px;
+    top:11px;
+    width:68px;
+    height:62px;
+}
+
+.build-img img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+
+.build-title{
+    font-size:24px;
+    line-height:28px;
+}
+
+.build-text{
+    margin-top:3px;
+    font-size:10px;
+    line-height:14px;
+    color:#fff;
+}
+
+/* BOTTOM NAV */
+.bottom-nav{
+    position:absolute;
+    left:8px;
+    top:1352px;
+    width:calc(100% - 16px);
+    height:64px;
+    border-radius:30px;
+    background:#121826;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    padding:5px 10px;
+    z-index:20;
+}
+
+.nav-item{
+    width:20%;
+    height:55px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    color:#fff;
+    text-decoration:none;
+    font-size:9px;
+}
+
+.nav-item img{
+    width:20px;
+    height:20px;
+    object-fit:contain;
+}
+
+.nav-item.active{
+    color:#35a7ff;
+}
+
+.nav-item:not(.active){
+    color:#8c99ab;
+}
+
+/* DESKTOP PREVIEW */
+@media(min-width:600px){
+    body{
+        padding:30px 0;
+    }
+
+    .app{
+        box-shadow:0 0 60px rgba(0,0,0,.55);
+        border-radius:28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="dynamic-island"></div>
+
+    <!-- STATUS -->
+    <div class="status">
+        <span>9:41</span>
+        <span>••• ◉ ▰</span>
+    </div>
+
+    <!-- GLOWS -->
+    <img class="blue-glow"
+         src="https://www.figma.com/api/mcp/asset/f1f64cd8-3b7d-426a-9e31-bf6df7459c40.svg">
+
+    <img class="purple-glow"
+         src="https://www.figma.com/api/mcp/asset/97abf357-bba4-47f6-8459-cd5e73d60045.svg">
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="brand-row">
+            <div class="brand">ATOZRY</div>
+            <div class="tagline">A to Z, Recode Yourself</div>
+        </div>
+
+        <div class="profile">
+            <img src="https://www.figma.com/api/mcp/asset/1de024fc-ec8d-4e72-beac-0e732cad8a93.svg">
+            <div class="profile-letter">S</div>
+        </div>
+
+        <div class="greeting">Hey Sanjay 👋</div>
+        <div class="subtitle">Ready to recode yourself today?</div>
+
+    </header>
+
+
+    <!-- CONTINUE LEARNING -->
+    <section class="continue">
+
+        <div class="continue-title">CONTINUE LEARNING</div>
+
+        <div class="lesson-badge">Lesson 6 of 9</div>
+
+        <div class="lesson">
+
+            <div class="python-icon">
+                <img src="https://www.figma.com/api/mcp/asset/118ac1c1-d323-4f9e-985f-9cef2b240492.svg">
+            </div>
+
+            <div class="lesson-info">
+                <div class="lesson-name">Python · Data Structures</div>
+                <div class="lesson-description">
+                    Work with collections of values.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="progress-label">
+            <span>Course progress</span>
+            <span>67%</span>
+        </div>
+
+        <div class="progress">
+            <div class="progress-fill"></div>
+        </div>
+
+        <button class="continue-btn">
+            ▶ &nbsp; Continue lesson
+        </button>
+
+    </section>
+
+
+    <!-- PROGRAMMING LANGUAGES -->
+    <section class="section-title">
+        <h2>Programming languages</h2>
+        <a href="#">View all ›</a>
+    </section>
+
+
+    <div class="languages-wrap">
+
+        <div class="languages">
+
+            <!-- PYTHON -->
+            <div class="language-card">
+
+                <div class="lang-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/0de12cd3-3302-4272-82db-347c8d912de4.svg">
+                </div>
+
+                <div class="lang-short python-short">Py</div>
+
+                <div class="lang-name">Python</div>
+                <div class="lang-level">Beginner</div>
+
+                <div class="lang-progress">
+                    <div class="lang-fill" style="width:63%"></div>
+                </div>
+
+                <div class="lang-lessons">6/9 lessons</div>
+
+            </div>
+
+
+            <!-- C -->
+            <div class="language-card">
+
+                <div class="lang-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/ae61cf37-f26a-40ca-811a-8f0dbef53dab.svg">
+                </div>
+
+                <div class="lang-short c-short">C</div>
+
+                <div class="lang-name">C</div>
+                <div class="lang-level">Intermediate</div>
+
+                <div class="lang-progress">
+                    <div class="lang-fill" style="width:53%"></div>
+                </div>
+
+                <div class="lang-lessons">5/9 lessons</div>
+
+            </div>
+
+
+            <!-- C++ -->
+            <div class="language-card">
+
+                <div class="lang-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/7dca510f-5c10-4c95-a1d3-1b6b308351a9.svg">
+                </div>
+
+                <div class="lang-short cpp-short">C+</div>
+
+                <div class="lang-name">C++</div>
+                <div class="lang-level">Intermediate</div>
+
+                <div class="lang-progress">
+                    <div class="lang-fill" style="width:44%"></div>
+                </div>
+
+                <div class="lang-lessons">4/9 lessons</div>
+
+            </div>
+
+
+            <!-- JAVA -->
+            <div class="language-card">
+
+                <div class="lang-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/7b7089da-5734-4e53-a309-c62f5320626d.svg">
+                </div>
+
+                <div class="lang-short java-short">JA</div>
+
+                <div class="lang-name">Java</div>
+                <div class="lang-level">Intermediate</div>
+
+                <div class="lang-progress">
+                    <div class="lang-fill" style="width:44%"></div>
+                </div>
+
+                <div class="lang-lessons">4/9 lessons</div>
+
+            </div>
+
+
+            <!-- JAVASCRIPT -->
+            <div class="language-card">
+
+                <div class="lang-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/4abdb0a1-a737-4832-b502-f14cc72b476f.svg">
+                </div>
+
+                <div class="lang-short js-short">JS</div>
+
+                <div class="lang-name">JavaScript</div>
+                <div class="lang-level">Beginner</div>
+
+                <div class="lang-progress">
+                    <div class="lang-fill" style="width:76%"></div>
+                </div>
+
+                <div class="lang-lessons">7/9 lessons</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="scrollbar">
+        <div></div>
+    </div>
+
+
+    <!-- DAILY CHALLENGE -->
+    <section class="challenge">
+
+        <h2>Daily Coding Challenge</h2>
+
+        <div class="challenge-main">
+
+            <div class="challenge-icon">
+                <img src="https://www.figma.com/api/mcp/asset/235cbbd0-5172-480e-8864-14743927e9d0.svg">
+            </div>
+
+            <div class="challenge-info">
+
+                <div class="challenge-name">
+                    Reverse a String
+                </div>
+
+                <div class="difficulty">
+                    Difficulty: Easy
+                    <span class="xp">⚡ +50 XP</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="challenge-btn">
+            Solve challenge ›
+        </button>
+
+    </section>
+
+
+    <!-- YOUR PROGRESS -->
+    <section class="progress-section">
+
+        <div class="progress-heading">
+            <h2>Your progress</h2>
+            <a href="#">Details ›</a>
+        </div>
+
+
+        <div class="stats">
+
+            <!-- STREAK -->
+            <div class="stat">
+
+                <div class="stat-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/cad3eb5d-c583-48d8-9add-6048ec73d5f1.svg">
+                </div>
+
+                <div class="stat-text">
+                    <div class="stat-value">7 days</div>
+                    <div class="stat-label">Current streak</div>
+                </div>
+
+            </div>
+
+
+            <!-- XP -->
+            <div class="stat">
+
+                <div class="stat-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/0df237e4-96ac-4a44-9554-8d3d71874773.svg">
+                </div>
+
+                <div class="stat-text">
+                    <div class="stat-value">850 XP</div>
+                    <div class="stat-label">Total XP</div>
+                </div>
+
+            </div>
+
+
+            <!-- LEVEL -->
+            <div class="stat">
+
+                <div class="stat-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/e80090bd-a5f4-4c32-a4e5-d751c18fd9de.svg">
+                </div>
+
+                <div class="stat-text">
+                    <div class="stat-value">Level 6</div>
+                    <div class="stat-label">Your level</div>
+                </div>
+
+            </div>
+
+
+            <!-- LESSONS -->
+            <div class="stat">
+
+                <div class="stat-icon">
+                    <img src="https://www.figma.com/api/mcp/asset/ab9bb669-a01e-4ad4-8607-fa127d6b2059.svg">
+                </div>
+
+                <div class="stat-text">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Lessons completed</div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LEVEL 7 -->
+        <div class="level-card">
+
+            <div class="level-top">
+                <span>Progress to level 7</span>
+                <span>67%</span>
+            </div>
+
+            <div class="level-progress">
+                <div></div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BUILD CARD -->
+    <section class="build">
+
+        <div class="build-img">
+            <img src="https://www.figma.com/api/mcp/asset/3d8465e8-1fc8-4e41-a788-7112f7530234.png">
+        </div>
+
+        <div class="build-title">Build</div>
+
+        <div class="build-text">
+            build something creative with us.<br>
+            Guided projects, blank canvas, challenges
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+
+        <a class="nav-item active" href="#">
+            <img src="https://www.figma.com/api/mcp/asset/15f625ea-ad98-4e20-8e4e-55e6727a505c.svg">
+            <span>Home</span>
+        </a>
+
+        <a class="nav-item" href="#">
+            <img src="https://www.figma.com/api/mcp/asset/d8330135-0ff8-40e8-8510-aeb347e4210c.svg">
+            <span>Learn</span>
+        </a>
+
+        <a class="nav-item" href="#">
+            <img src="https://www.figma.com/api/mcp/asset/09735db6-53de-40e1-a756-890c3c774770.svg">
+            <span>Challenges</span>
+        </a>
+
+        <a class="nav-item" href="#">
+            <img src="https://www.figma.com/api/mcp/asset/5821b173-1790-4cc5-97e8-5fc1f580c674.svg">
+            <span>Leaderboard</span>
+        </a>
+
+        <a class="nav-item" href="#">
+            <img src="https://www.figma.com/api/mcp/asset/a90f6505-ee7f-4f3e-b8af-dded7d5cb4fc.svg">
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+</div>
+
+
+<script>
+
+/* CONTINUE LESSON BUTTON */
+document.querySelector(".continue-btn").addEventListener("click",()=>{
+    alert("Opening Python · Data Structures...");
+});
+
+
+/* CHALLENGE BUTTON */
+document.querySelector(".challenge-btn").addEventListener("click",()=>{
+    alert("Opening Reverse a String challenge...");
+});
+
+
+/* BOTTOM NAVIGATION */
+document.querySelectorAll(".nav-item").forEach(item=>{
+    item.addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        document.querySelectorAll(".nav-item")
+            .forEach(nav=>nav.classList.remove("active"));
+
+        this.classList.add("active");
+
+    });
+});
+
+
+/* VIEW ALL */
+document.querySelector(".section-title a").addEventListener("click",e=>{
+    e.preventDefault();
+    document.querySelector(".languages-wrap")
+        .scrollIntoView({behavior:"smooth"});
+});
+
+</script>
+
+</body>
+</html>
